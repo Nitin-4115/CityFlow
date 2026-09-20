@@ -38,7 +38,7 @@ export default function MongoStudio() {
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="rounded-md bg-emerald-500/20 border border-emerald-400/40 px-2 py-0.5 text-xs font-bold text-emerald-300">
-                GRADED ACTIVITY 1 [15 MARKS]
+                MONGODB BIG DATA ENGINE
               </span>
               <span className="text-xs text-slate-400">
                 MongoDB NoSQL Data Processing &amp; Geospatial Analysis

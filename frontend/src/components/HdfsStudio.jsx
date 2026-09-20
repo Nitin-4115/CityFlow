@@ -39,7 +39,7 @@ export default function HdfsStudio() {
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="rounded-md bg-sky-500/20 border border-sky-400/40 px-2 py-0.5 text-xs font-bold text-sky-300">
-                GRADED ACTIVITY 2 [10 MARKS]
+                HADOOP DISTRIBUTED STORAGE
               </span>
               <span className="text-xs text-slate-400">Hadoop Pseudo-Cluster (v3.2.1)</span>
             </div>

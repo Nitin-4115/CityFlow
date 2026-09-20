@@ -1,8 +1,8 @@
 """
 CityFlow - High-Performance FastAPI Backend Server.
 Provides REST APIs for:
-1. Graded Activity 2: Hadoop HDFS File Operations & MapReduce Job Details
-2. Graded Activity 1: MongoDB Big Data Collections & 6 Aggregation Pipelines
+1. Hadoop HDFS File Operations & MapReduce Job Details
+2. MongoDB Big Data Collections & 6 Aggregation Pipelines
 3. Core Transit Analytics: Geospatial Stops, Route Congestion, Ridership Curves
 4. Machine Learning Inference: Real-time RandomForest Congestion Forecasting
 """
@@ -98,7 +98,7 @@ def get_health():
 
 
 # ==============================================================================
-# Activity 2: Hadoop HDFS & MapReduce Endpoints
+# Hadoop HDFS & MapReduce Endpoints
 # ==============================================================================
 @app.get("/api/hdfs/status")
 def get_hdfs_status():
@@ -241,7 +241,7 @@ def get_mapreduce_jobs():
 
 
 # ==============================================================================
-# Activity 1: MongoDB Big Data Collections & 6 Aggregations
+# MongoDB Big Data Collections & 6 Aggregations
 # ==============================================================================
 @app.get("/api/mongo/status")
 def get_mongo_status():
