@@ -72,8 +72,10 @@ This automatically creates the environment and installs all locked dependencies.
 
 ### 2. Dataset Setup (Kaggle)
 CityFlow is benchmarked on the real-world **Bangalore Traffic Analysis Dataset** (~2.1M records):
-1. Visit Kaggle: [Bangalore Traffic Analysis Dataset](https://www.kaggle.com/datasets) (search for **`bangalore_routes.csv`** or use Kaggle CLI: `kaggle datasets download -d <dataset-id>`).
-2. Download and extract **`bangalore_routes.csv`**.
+1. Download the dataset directly from Kaggle:
+   👉 **[Bangalore Traffic Analysis Dataset](https://www.kaggle.com/datasets/asshridattaaigal/bangalore-traffic-analysis-dataset)**
+   *(Or download via Kaggle CLI: `kaggle datasets download -d asshridattaaigal/bangalore-traffic-analysis-dataset`)*
+2. Extract the downloaded zip file to get **`bangalore_routes.csv`**.
 3. Place the file inside the project directory:
    ```text
    CityFlow/data/kaggle_dataset/bangalore_routes.csv
