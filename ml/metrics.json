@@ -1,0 +1,68 @@
+{
+  "trained_at": "2026-09-20T09:18:05.031167+00:00",
+  "train_rows": 100263,
+  "test_rows": 25066,
+  "accuracy": 0.9525652277986116,
+  "classes": [
+    "HEAVY_CONGESTION",
+    "MODERATE_TRAFFIC",
+    "NORMAL"
+  ],
+  "confusion_matrix": [
+    [
+      11682,
+      398,
+      0
+    ],
+    [
+      579,
+      11872,
+      37
+    ],
+    [
+      37,
+      138,
+      323
+    ]
+  ],
+  "classification_report": {
+    "HEAVY_CONGESTION": {
+      "precision": 0.9499105545617174,
+      "recall": 0.9670529801324503,
+      "f1-score": 0.9584051193699237,
+      "support": 12080.0
+    },
+    "MODERATE_TRAFFIC": {
+      "precision": 0.9568020631850419,
+      "recall": 0.9506726457399103,
+      "f1-score": 0.9537275064267352,
+      "support": 12488.0
+    },
+    "NORMAL": {
+      "precision": 0.8972222222222223,
+      "recall": 0.6485943775100401,
+      "f1-score": 0.752913752913753,
+      "support": 498.0
+    },
+    "accuracy": 0.9525652277986116,
+    "macro avg": {
+      "precision": 0.9346449466563271,
+      "recall": 0.8554400011274669,
+      "f1-score": 0.8883487929034706,
+      "support": 25066.0
+    },
+    "weighted avg": {
+      "precision": 0.9522971487603533,
+      "recall": 0.9525652277986116,
+      "f1-score": 0.9519921005025451,
+      "support": 25066.0
+    }
+  },
+  "feature_importance": {
+    "route_id": 0.8840295764912116,
+    "weather": 0.06906880397325205,
+    "hour": 0.035809993297230086,
+    "is_weekend": 0.011091626238304843
+  },
+  "train_duration_sec": 53.69
+}

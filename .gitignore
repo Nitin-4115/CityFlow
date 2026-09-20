@@ -1,0 +1,38 @@
+# ==============================================================================
+# CityFlow - Git Ignore Configuration
+# ==============================================================================
+
+# Python environments & caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+env/
+venv/
+ENV/
+.pytest_cache/
+
+# Node.js dependencies & caches (dist is kept since it's the prebuilt UI bundle!)
+frontend/node_modules/
+frontend/.vite/
+frontend/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Large ML model artifact (re-trained in 50s on demand: python ml/train_model.py)
+ml/model.joblib
+
+# Large Datasets (> 100MB exceeds standard GitHub 100MB limit)
+# Note: Source Kaggle dataset & processed GPS telemetries can be downloaded/re-ingested
+data/kaggle_dataset/bangalore_routes.csv
+data/raw_gps/gps_telemetry.csv
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
