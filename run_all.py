@@ -53,7 +53,6 @@ def main():
     parser = argparse.ArgumentParser(description="Master runner for CityFlow pipeline.")
     parser.add_argument("-c", "--corridors", type=str, default="all", help="Number of dynamic corridors to extract (default: 'all')")
     parser.add_argument("-s", "--stations", type=str, default="all", help="Number of transit stations to extract (default: 'all')")
-    parser.add_argument("--synthetic", action="store_true", help="Force synthetic data generator instead of Kaggle real dataset")
     parser.add_argument("--quick", action="store_true", help="Run with small dataset for rapid demonstration")
     parser.add_argument("--no-web", action="store_true", help="Skip launching the web application at the end")
     parser.add_argument("--port", type=int, default=8000, help="Port for Web Server (default: 8000)")
@@ -62,25 +61,23 @@ def main():
     banner()
     start_time = time.time()
 
-    # Step 1: Ingest Real Kaggle Dataset or Generate Data
-    if os.path.exists(KAGGLE_CSV) and not args.synthetic:
-        step(1, f"Ingesting Real Bengaluru Traffic Dataset ({'300k sample' if args.quick else '2.1M full records'} from Kaggle)")
-        gen_cmd = [
-            PYTHON_EXE, os.path.join(PROJECT_ROOT, "data", "ingest_kaggle_bengaluru.py"),
-            "--corridors", str(args.corridors),
-            "--stations", str(args.stations),
-        ]
-        if args.quick:
-            gen_cmd.append("--quick")
-        if not run_command(gen_cmd, "Real Bengaluru Traffic Ingestion"):
-            sys.exit(1)
-    else:
-        step(1, "Generating Calibrated Datasets (GPS Telemetry, RFID Scans, Transit Stops)")
-        gen_cmd = [PYTHON_EXE, os.path.join(PROJECT_ROOT, "data", "generate_data.py")]
-        if args.quick:
-            gen_cmd.append("--quick")
-        if not run_command(gen_cmd, "Data Generation"):
-            sys.exit(1)
+    # Step 1: Ingest Real Kaggle Dataset
+    if not os.path.exists(KAGGLE_CSV):
+        print(f"\n[ERROR] Kaggle dataset not found at:\n  {KAGGLE_CSV}")
+        print("\nPlease download 'bangalore_routes.csv' from Kaggle and place it in 'data/kaggle_dataset/'.")
+        print("See README.md for download instructions.\n")
+        sys.exit(1)
+
+    step(1, f"Ingesting Real Bengaluru Traffic Dataset ({'300k sample' if args.quick else '2.1M full records'} from Kaggle)")
+    gen_cmd = [
+        PYTHON_EXE, os.path.join(PROJECT_ROOT, "data", "ingest_kaggle_bengaluru.py"),
+        "--corridors", str(args.corridors),
+        "--stations", str(args.stations),
+    ]
+    if args.quick:
+        gen_cmd.append("--quick")
+    if not run_command(gen_cmd, "Real Bengaluru Traffic Ingestion"):
+        sys.exit(1)
 
     # Step 2: Run MapReduce Jobs
     step(2, "Executing MapReduce Streaming Jobs (Traffic, Hourly ML, Ridership)")

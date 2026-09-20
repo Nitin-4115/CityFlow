@@ -17,9 +17,7 @@ KAGGLE_CSV = os.path.join(BASE_DIR, "data", "kaggle_dataset", "bangalore_routes.
 RAW_GPS_DIR = os.path.join(BASE_DIR, "data", "raw_gps")
 RAW_RFID_DIR = os.path.join(BASE_DIR, "data", "raw_rfid")
 GPS_OUTPUT = os.path.join(RAW_GPS_DIR, "gps_telemetry.csv")
-GPS_OUTPUT_ALT = os.path.join(BASE_DIR, "data", "gps_telemetry.csv")
 RFID_OUTPUT = os.path.join(RAW_RFID_DIR, "rfid_ticketing.csv")
-RFID_OUTPUT_ALT = os.path.join(BASE_DIR, "data", "rfid_ticketing.csv")
 STOPS_CSV = os.path.join(BASE_DIR, "data", "transit_stops.csv")
 ROUTES_META = os.path.join(BASE_DIR, "data", "routes_metadata.json")
 
@@ -264,7 +262,6 @@ def ingest_full_bengaluru_dataset(sample_size=None, num_corridors="all", num_sta
         "weather": weather_clean
     })
     out_gps.to_csv(GPS_OUTPUT, index=False)
-    out_gps.to_csv(GPS_OUTPUT_ALT, index=False)
     print(f"[+] Saved GPS telemetry ({os.path.getsize(GPS_OUTPUT) / (1024*1024):.1f} MB)")
 
     # 3. Dynamic Transit Stops Extraction
@@ -335,7 +332,6 @@ def ingest_full_bengaluru_dataset(sample_size=None, num_corridors="all", num_sta
         "timestamp": rfid_timestamps
     })
     rfid_df.to_csv(RFID_OUTPUT, index=False)
-    rfid_df.to_csv(RFID_OUTPUT_ALT, index=False)
     print(f"[+] Saved {len(rfid_df):,} RFID records ({os.path.getsize(RFID_OUTPUT) / (1024*1024):.1f} MB)")
 
     elapsed = time.time() - t0

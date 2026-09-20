@@ -70,7 +70,16 @@ CityFlow ingests **2.1 Million vehicle GPS pings** and **500,000 transit RFID ti
 Double-click **`setup_env.bat`** (or run `conda env create -f environment.yml`).
 This automatically creates the environment and installs all locked dependencies.
 
-### 2. Launching the Platform
+### 2. Dataset Setup (Kaggle)
+CityFlow is benchmarked on the real-world **Bangalore Traffic Analysis Dataset** (~2.1M records):
+1. Visit Kaggle: [Bangalore Traffic Analysis Dataset](https://www.kaggle.com/datasets) (search for **`bangalore_routes.csv`** or use Kaggle CLI: `kaggle datasets download -d <dataset-id>`).
+2. Download and extract **`bangalore_routes.csv`**.
+3. Place the file inside the project directory:
+   ```text
+   CityFlow/data/kaggle_dataset/bangalore_routes.csv
+   ```
+
+### 3. Launching the Platform
 Double-click **`run.bat`** (or run `.\run.ps1` in PowerShell).
 The launcher automatically executes all 6 pipeline steps:
 1. Ingests 2.1M Bengaluru GPS records & 500k transit tickets

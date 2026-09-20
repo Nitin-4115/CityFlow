@@ -73,12 +73,12 @@ def main():
     data_dir = os.path.join(PROJECT_ROOT, "data")
     output_dir = os.path.join(PROJECT_ROOT, "output")
 
-    gps_csv = os.path.join(data_dir, "gps_telemetry.csv")
-    rfid_csv = os.path.join(data_dir, "rfid_ticketing.csv")
+    gps_csv = os.path.join(data_dir, "raw_gps", "gps_telemetry.csv")
+    rfid_csv = os.path.join(data_dir, "raw_rfid", "rfid_ticketing.csv")
 
     if not os.path.exists(gps_csv) or not os.path.exists(rfid_csv):
-        print(f"[!] Input datasets missing in {data_dir}. Generating now...")
-        subprocess.run([sys.executable, os.path.join(data_dir, "generate_data.py")], check=True)
+        print(f"[!] Extracted telemetry missing. Ingesting from Kaggle dataset now...")
+        subprocess.run([sys.executable, os.path.join(data_dir, "ingest_kaggle_bengaluru.py")], check=True)
 
     # Job 1: Traffic Congestion Summary
     run_mapreduce_job(
