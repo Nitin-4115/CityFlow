@@ -57,7 +57,6 @@ def main():
     parser.add_argument("--quick", action="store_true", help="Run with small dataset for rapid demonstration")
     parser.add_argument("--no-web", action="store_true", help="Skip launching the web application at the end")
     parser.add_argument("--port", type=int, default=8000, help="Port for Web Server (default: 8000)")
-    parser.add_argument("--streamlit", action="store_true", help="Launch legacy Streamlit dashboard instead of React Web App")
     args = parser.parse_args()
 
     banner()
@@ -114,42 +113,27 @@ def main():
 
     # Step 6: Launch Web App
     if not args.no_web:
-        if args.streamlit:
-            step(6, f"Launching Streamlit Dashboard on port 8501")
-            app_path = os.path.join(PROJECT_ROOT, "dashboard", "app.py")
-            dash_cmd = [
-                PYTHON_EXE, "-m", "streamlit", "run", app_path,
-                "--server.port", "8501",
-                "--server.headless", "false",
-            ]
-            print(f"\n[INFO] Starting Streamlit web server...")
-            print(f"[INFO] Dashboard URL: http://localhost:8501\n")
-            try:
-                subprocess.run(dash_cmd, cwd=PROJECT_ROOT)
-            except KeyboardInterrupt:
-                print("\n[INFO] Dashboard stopped by user.")
-        else:
-            step(6, f"Launching React Glassmorphic Web App on port {args.port}")
-            server_cmd = [
-                PYTHON_EXE, "-m", "uvicorn", "api.server:app",
-                "--host", "127.0.0.1",
-                "--port", str(args.port),
-            ]
-            print(f"\n[INFO] Starting FastAPI Backend & React UI...")
-            print(f"[INFO] Web App URL: http://localhost:{args.port}")
-            print(f"[INFO] Swagger API Docs: http://localhost:{args.port}/docs")
-            print("[INFO] Press Ctrl+C in this terminal to stop the server.\n")
-            
-            # Automatically open browser
-            try:
-                webbrowser.open(f"http://localhost:{args.port}")
-            except Exception:
-                pass
+        step(6, f"Launching React Glassmorphic Web App on port {args.port}")
+        server_cmd = [
+            PYTHON_EXE, "-m", "uvicorn", "api.server:app",
+            "--host", "127.0.0.1",
+            "--port", str(args.port),
+        ]
+        print(f"\n[INFO] Starting FastAPI Backend & React UI...")
+        print(f"[INFO] Web App URL: http://localhost:{args.port}")
+        print(f"[INFO] Swagger API Docs: http://localhost:{args.port}/docs")
+        print("[INFO] Press Ctrl+C in this terminal to stop the server.\n")
+        
+        # Automatically open browser
+        try:
+            webbrowser.open(f"http://localhost:{args.port}")
+        except Exception:
+            pass
 
-            try:
-                subprocess.run(server_cmd, cwd=PROJECT_ROOT)
-            except KeyboardInterrupt:
-                print("\n[INFO] Web App stopped by user.")
+        try:
+            subprocess.run(server_cmd, cwd=PROJECT_ROOT)
+        except KeyboardInterrupt:
+            print("\n[INFO] Web App stopped by user.")
 
 
 if __name__ == "__main__":
